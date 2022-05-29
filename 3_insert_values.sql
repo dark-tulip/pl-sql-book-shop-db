@@ -10,7 +10,6 @@ INSERT INTO author (surname_author, name_author, othc_author) VALUES ('Пушк�
 INSERT INTO author (surname_author, name_author, othc_author) VALUES ('Джейн', 'Остин', null);
 INSERT INTO author (surname_author, name_author, othc_author) VALUES ('Пауло', 'Коэльо', null);
 
-select * from author;
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ЖАНРЫ  -----------------------
 
@@ -36,6 +35,7 @@ CREATE TABLE genre
 		name_genre NVARCHAR2(30)
 );
 
+COMMIT;
 
 -- Для генерации следующего значения первичного ключа
 -- Можно для столбца genre_id давать знаечние как genre_seq.nextval 
@@ -51,7 +51,7 @@ INSERT INTO genre(name_genre) VALUES('Проза');
 INSERT INTO genre(name_genre) VALUES('Детская литература');
 INSERT INTO genre(name_genre) VALUES('Учебники');
 
-select * from genre;
+-- select * from genre;
 
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ КНИГИ  -----------------------
@@ -86,7 +86,8 @@ INSERT INTO book(title, price, amount) VALUES ('Медный всадник', 90
 INSERT INTO book(title, price, amount) VALUES ('Руслан и Людмила', 715, 9);
 INSERT INTO book(title, price, amount) VALUES ('Гордость и предубеждение', 930, 60);
 
-select * from book;
+-- select * from book;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ШАГИ ПОКУПКИ  -----------------------
 
@@ -95,7 +96,8 @@ INSERT INTO step(name_step) VALUES ('Упаковка');
 INSERT INTO step(name_step) VALUES ('Транспортировка');
 INSERT INTO step(name_step) VALUES ('Доставка');
 
-select * from step;
+-- select * from step;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ BOOK-GENRE - жанры книг  -----------------------
 
@@ -129,7 +131,8 @@ INSERT INTO book_genre (book_id, genre_id) VALUES (27, 9);
 INSERT INTO book_genre (book_id, genre_id) VALUES (28, 2);
 INSERT INTO book_genre (book_id, genre_id) VALUES (29, 6);
 
-select * from book_genre;
+-- select * from book_genre;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ BOOK-GENRE - авторы книг  -----------------------
 
@@ -163,6 +166,7 @@ INSERT INTO book_author(book_id, author_id) VALUES (27, 7);
 INSERT INTO book_author(book_id, author_id) VALUES (28, 7);
 INSERT INTO book_author(book_id, author_id) VALUES (29, 8);
 
+
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ГОРОДА -----------------------
 
 INSERT INTO city(name_city) VALUES ('Алматы');
@@ -175,6 +179,7 @@ INSERT INTO city(name_city) VALUES ('Караганда');
 INSERT INTO city(name_city) VALUES ('Актау');
 INSERT INTO city(name_city) VALUES ('Атырау');
 INSERT INTO city(name_city) VALUES ('Семей');
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ УЛИЦЫ  -----------------------
 
@@ -195,6 +200,7 @@ INSERT INTO street(street_name) VALUES ('микрорайон-5');
 INSERT INTO street(street_name) VALUES ('микрорайон-6');
 
 commit;
+
 /*****************************************************************/
 -- IF YOU HAVE AN ERROR ORA-01658: не могу создать INITIAL экстент для сегмента в разделе PERM_TS
 -- USE THIS from sys
@@ -205,6 +211,8 @@ ALTER DATABASE
     AUTOEXTEND ON
     MAXSIZE UNLIMITED;
 /*****************************************************************/
+
+COMMIT;
 
 CONNECT book_admin/123;
 
@@ -230,7 +238,8 @@ INSERT INTO delivery_point(city_id, street_id, home_number) VALUES (1, 8, 15);
 INSERT INTO delivery_point(city_id, street_id, home_number) VALUES (1, 2, 15);
 INSERT INTO delivery_point(city_id, street_id, home_number) VALUES (2, 9, 15);
 
-select * from delivery_point;
+-- select * from delivery_point;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ СПОСОБЫ ДОСТАВКИ  -----------------------
 
@@ -238,7 +247,8 @@ INSERT INTO delivery_type(delivery_type_name) VALUES ('Доставка');
 INSERT INTO delivery_type(delivery_type_name) VALUES ('Самовывоз');
 INSERT INTO delivery_type(delivery_type_name) VALUES ('Почта');
 
-select * from delivery_type;
+-- select * from delivery_type;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ КЛИЕНТЫ -----------------------
 
@@ -268,34 +278,9 @@ INSERT INTO client (name_client, surname_client, email_clinet, phone_client, pas
     VALUES ('Екатерина', 'Шелкова',  'pavel@test', '77776555524', 'password', NULL, 1, 1);
 INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
     VALUES ('Арина', 'Махмудина',  'arinka@test', '77776499524', 'password', NULL, 1, 1);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Павел', 'Никитин',  'baranov@test', '777777453524', 'password', NULL, 1, 2);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Катя', 'Ян', 'abramova@test', '77776441124', 'password', NULL, 2, 2);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Иван', 'Лопатков', 'semenov@test', '77976445524', 'password', NULL, 3, 5);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Галина', 'Сервеевна', 'galin@test', '77976445524', 'password', NULL, 4, 6);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Алина', 'Андреева', 'nikitovna@test', '77796445524', 'password', NULL, 1, 7);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Никита', 'Андреев', 'nikita@test', '77776495524', 'password', NULL, 2, 1);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Анастасия', 'Васильевна', 'anastasiya@test', '77776445524', 'password', NULL, 2, 1);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Ксения', 'Веселькова', 'kcenya@test', '77776445524', 'password', NULL, 5, 2);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Варвара', 'Барышева', 'varvara@test', '5555555555', 'password', NULL, 6, 4);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Ирина', 'irina@test', 'irinka@test', '77776466524', 'password', NULL, 3, 3);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Алла', 'Андреева',  'allochka04@test', '77976445524', 'password', NULL, 2, 5);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Екатерина', 'Шелкова',  'pavel@test', '97776445524', 'password', NULL, 1, 1);
-INSERT INTO client (name_client, surname_client, email_clinet, phone_client, password_client, client_discount, city_id, street_id)
-    VALUES ('Арина', 'Махмудина',  'arinka@test', '77766445524', 'password', NULL, 1, 1);
 
-select * from client;
+ -- select * from client;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ЗАКАЗЫ  -----------------------
 
@@ -308,7 +293,8 @@ INSERT INTO orders (order_comment, client_id, order_price, delivery_type_id, del
 INSERT INTO orders (order_comment, client_id, order_price, delivery_type_id, delivery_point_id, payment_date, client_discount)
     VALUES ('Чем быстрее тем лучше', 4, 0, 1, 5, sysdate, 5);
     
-select * from orders;
+ --select * from orders;
+
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ЗАКАЗЫ КНИГ ПО КОЛИЧЕСТВУ -----------------------
 
@@ -329,7 +315,6 @@ INSERT INTO book_order(order_id, book_id, amount) VALUES (4, 3, 1);
 INSERT INTO book_order(order_id, book_id, amount) VALUES (4, 29, 2);
 INSERT INTO book_order(order_id, book_id, amount) VALUES (4, 6, 1);
 
-select * from book_order;
 
 ----------------------- ЗАПОЛНЯЕМ ТАБЛИЦУ ШАГИ ЗАКАЗОВ  -----------------------
 
@@ -351,4 +336,7 @@ INSERT INTO order_step(order_id, step_id, order_start_date, order_end_date) VALU
 INSERT INTO order_step(order_id, step_id, order_start_date, order_end_date) VALUES (4, 3, NULL, NULL);
 INSERT INTO order_step(order_id, step_id, order_start_date, order_end_date) VALUES (4, 4, NULL, NULL);
 
-select * from order_step;
+-- select * from order_step;
+
+
+COMMIT;

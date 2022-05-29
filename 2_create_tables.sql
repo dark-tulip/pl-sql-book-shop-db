@@ -32,6 +32,7 @@ CREATE TABLE book
 		amount    NUMERIC
 );
 
+
 ---Создание таблицы BOOK-GENRE - жанры
 CREATE TABLE book_genre
 (
@@ -114,7 +115,6 @@ CREATE TABLE delivery_type
 		delivery_type_name NVARCHAR2(30)
 );
 
--- DROP TABLE delivery_type CASCADE CONSTRAINTS PURGE; 
 
 CREATE TABLE client
 (
@@ -136,6 +136,7 @@ CREATE TABLE client
 			FOREIGN KEY (city_id)   REFERENCES street(street_id) 
 					ON DELETE CASCADE
 );
+
 
  ---Таблица Заказы orders
 CREATE TABLE orders

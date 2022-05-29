@@ -1,4 +1,16 @@
+/*** CLEAR THE DATA, if you're already created book_admin user ***/
+
+--DROP USER book_admin CASCADE;
+--DROP TABLESPACE perm_ts INCLUDING CONTENTS AND DATAFILES;
+--DROP TABLESPACE temp_ts INCLUDING CONTENTS AND DATAFILES;
+
+ALTER USER SYS IDENTIFIED BY 123;
+
+
+CONNECT sys/123 as sysdba;
+
 ALTER SYSTEM SET DB_CREATE_FILE_DEST = '$ORACLE_HOME/rdbms/test';
+
 
 CREATE TABLESPACE perm_ts DATAFILE 'perm_1.dbf' SIZE 1M
     EXTENT MANAGEMENT LOCAL
@@ -8,12 +20,14 @@ CREATE TEMPORARY TABLESPACE temp_ts
     TEMPFILE 'temp_1.dbf' 
     SIZE 5M AUTOEXTEND ON;
 
+
 --  Location of the table space files
 select * from v$parameter where value like '%/rdbms/test%'
 union
 select * from v$parameter where value like '%/u01/app/oracle/product/19.3.0/dbhome_1/dbs%';
 
 SELECT * FROM v$datafile;
+
 
 -- Create a new user in Oracle
 CREATE USER book_admin
